@@ -7,13 +7,20 @@
     </div>
 
     <div class="mb-4 flex justify-between text-sm text-slate-500 items-center">
-        <div class="flex space-x-4">
-            <div>Company Name</div>
+        <div class="flex items-center space-x-4">
+            <div>{{ $job->employer->company_name }} Name</div>
             <div>{{ $job->location }}</div>
+            @if ($job->deleted_at)
+                <span class="text-xs text-red-500">Deleted</span>
+            @endIf
         </div>
         <div class="flex space-x-1 text-xs">
-            <x-tag>{{ Str::ucfirst($job->experience) }}</x-tag>
-            <x-tag>{{ $job->category }}</x-tag>
+            <x-tag>
+                <a href="{{ route('jobs.index', ['experience' => $job->experience]) }}">{{ Str::ucfirst($job->experience) }}</a>
+            </x-tag>
+            <x-tag>
+                <a href="{{ route('jobs.index', ['category' => $job->category]) }}">{{ Str::ucfirst($job->category) }}</a>
+            </x-tag>
         </div>
     </div>
 
